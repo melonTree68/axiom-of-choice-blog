@@ -124,16 +124,15 @@ What is the mysterious axiom of choice? Why the hell do we need it even just to 
 
 \section{Introduction}
 Instead of throwing the definitions and theorems straight at your face, we first raise some seemingly trivial but somewhat interesting questions.
-
 \begin{enumerate}
     \item Is it true that every infinite set has a countable (countably infinite) subset?
     \item Is it true that the Cartesian product of any nonempty collection of nonempty sets is nonempty?
 \end{enumerate}
 
-\subsection*{The First Question}
+\paragraph{The first question}
 For the first question, you may say that hey you are just too stupid. We can easily construct an infinite sequence $\{x_n\}_{n\in\N}$ in $X$ by the following. Take $x_0\in X$. Inductively, after $\{x_n\}_{n\leq m}$ is fixed, take $x_{m+1}\in X\backslash\{x_n\}_{n\leq m}\neq\emptyset$ because $X$ is infinite.
 
-This method has two problems. The first is that the many (countably infinite) choices of $x_{m+1}\in X\backslash\{x_n\}_{n\leq m}$ cannot be carried out without admitting (at least some weakened version of) the axiom of choice. The meaning of the last sentence will be further explained later.
+This method has two problems. The first is that the many (countably infinite) choices of $x_{m+1}\in X\backslash\{x_n\}_{n\leq m}$ cannot be carried out without admitting (at least some weakened version of) the axiom of choice. The meaning of the last sentence will be explained later.
 
 The other problem can be properly fixed. The problem is that you only proved by induction (recall what induction means) that for any $n\in\N$ there exists a (finite) injective sequence of length $n$ in $X$, rather than an infinite one. Recursion will remedy the situation.
 
@@ -143,16 +142,15 @@ The other problem can be properly fixed. The problem is that you only proved by 
 
 \begin{proof}
     We define $F$ by a first-order formula. We only describe it in natural language and one should be convinced that it can be converted to a nice first-order formula $\phi(n,y,G)$.
-    
     \begin{center}
-        $F(n)=x\iff$ there is a sequence $\abra{a_m:m<n}$ such that:
+        $F(n)=x\iff$ there is an $n$-sequence $\abra{a_m:m<n}$ such that:
         \begin{enumerate}
             \item For every $m<n$, $a_m=G(\abra{a_k:k<m})$;
             \item $x=G(\abra{a_m:m<n})$.
         \end{enumerate}
     \end{center}
 
-    One can prove by induction that for each $n\in\N$ $F(n)$ is unique; hence $F$ is uniquely determined by (2). And one can further prove by induction that for each $n\in\N$ there is an $n$-sequence satisfying (1).
+    One can prove by induction that for each $n\in\N$, $F(n)$ is unique; hence $F$ is a function uniquely determined by (2). And one can further prove by induction that for each $n\in\N$ there is an $n$-sequence satisfying (1).
 \end{proof}
 
 \begin{rmk}
@@ -161,7 +159,7 @@ The other problem can be properly fixed. The problem is that you only proved by 
 
 Of course the proposition is true. Two correct proofs are given in \ref{subsec: countable subset} using the axiom of choice and the well-ordering theorem, respectively. Both proofs use some kind of recursion to bypass the second problem above.
 
-\subsection*{The Second Question}
+\paragraph{The second question}
 For the second question, we first make precise the notion of the Cartesian product of an arbitrary collection of sets.
 
 \begin{defn}
@@ -169,7 +167,7 @@ For the second question, we first make precise the notion of the Cartesian produ
     \[\prod_{i\in I}A_i=\cbra{(f:I\to\bigcup\mathcal A):f(i)\in A_i,\forall i\in I}.\]
 \end{defn}
 
-If $I=\emptyset$ or $\emptyset\in\mathcal A$ then the Cartesian product is certainly empty. Otherwise, that $\prod_i A_i\neq\emptyset$ is equivalent to the existence of an $f:I\to\bigcup\mathcal A$ with $f(i)\in A_i$ for each $i$, called a \emph{choice function}. This is precisely what the axiom of choice says!
+If $I=\emptyset$ or $\emptyset\in\mathcal A$ then the Cartesian product is certainly empty. Otherwise, that $\prod_i A_i\neq\emptyset$ is equivalent to the existence of an $f:I\to\bigcup\mathcal A$ with $f(i)\in A_i$ for each $i$, called a \emph{choice function} on $\mathcal A$. This is precisely what the axiom of choice says!
 
 \begin{defn}
     Let $I$ be an index set and $\mathcal A=\{A_i:i\in I\}$ be a collection of sets indexed by $I$. A choice function on $\mathcal A$ is a function $f:I\to\bigcup\mathcal A$ such that $f(i)\in A_i$ for each $i\in I$. Note that a set $X$ can always be indexed by itself: $X=\{x:x\in X\}$, so a choice function on $X$ is a function $f:X\to\bigcup X$ such that $f(S)\in S$ for each $S\in X$.
@@ -211,12 +209,10 @@ In the following text, we shall frequently treat functions and relations as thei
 
 \subsection{AC implies Zorn's lemma}
 For the sake of contradiction, assume that $P$ is a nonempty poset such that
-
 \begin{enumerate}
     \item Every chain in $P$ has an upper bound;
     \item $P$ has no maximal elements.
 \end{enumerate}
-
 Let $\mathcal T$ be the set of all chains in $P$; it is a set because it is a subclass of the power set $\P(P)$. Define functions 
 \[F:\mathcal T\to\P(P)\backslash\{\emptyset\},\quad G:P\to\P(P)\backslash\{\emptyset\}\]
 by
@@ -224,7 +220,6 @@ by
 So $F(T)$ is the set of all upper bounds of the chain $T$, and $G(a)$ is the set of elements strictly greater than $a$. That $F(T)$ and $G(a)$ are nonempty follows from the two conditions above.
 
 Now consider $\{F(T):T\in\mathcal T\}$, treated as a collection of nonempty subsets of $P$ indexed by $\mathcal T$, and $\{G(a):a\in P\}$, treated as a collection of nonempty subsets of $P$ indexed by $P$. By AC, let $f$ be a choice function on $\{F(T):T\in\mathcal T\}$ and $g$ a choice function on $\{G(a):a\in P\}$, i.e.,
-
 \begin{itemize}
     \item $f:\mathcal T\to P$ satisfies $(c\leq f(T),\forall c\in T)$ for each $T\in\mathcal T$;
     \item $g:P\to P$ satisfies $x\leq g(x), x\neq g(x)$ for each $x\in P$.
@@ -241,19 +236,18 @@ Define a sequence $\abra{a_\alpha:\alpha\in\ord}$ by transfinite recursion:
 \[a_\alpha=h(\im a\restriction_\alpha)=h(\cbra{a_\xi:\xi<\alpha})\]
 for each $\alpha\in\ord$. One should be convinced that the recursion rule can be formulated as a function on the class of all transfinite sequences. By the property of $h$ as noted above, for any ordinal $\alpha$, $a\restriction_\alpha$ is an injective transfinite sequence whose image is a chain in $P$, ensuring that the recursion is well-defined.
 
-That immediately leads to a contradiction. Let $a^{-1}:\im a\to\ord$ be the surjective inverse function. By the axiom schema of replacement, $\im a^{-1}=\ord$ is a set, a contradiction. That completes the proof.
+That immediately leads to a contradiction. Let $a^{-1}:P\supseteq\im a\to\ord$ be the surjective inverse function. By the axiom schema of replacement, $\im a^{-1}=\ord$ is a set, a contradiction. That completes the proof.
 
 \subsection{Zorn's lemma implies AC}
 This proof is a typical application of Zorn's lemma. Suppose $\emptyset\not\in X\neq\emptyset$ is a nonempty collection of nonempty sets. Let $U=\bigcup X$.
 
 Let
 \[P=\cbra{(f:X'\to U):X'\subseteq X, f(S)\in S,\forall S\in X'}\]
-be a poset under set inclusion, i.e., function extension.
+be a poset under set inclusion, i.e., function extension. Because we can easily construct an $f$ by taking $X'$ to be a singleton, $P$ is nonempty.
 
-Because we can easily construct an $f$ by taking $X'$ to be a singleton, $P$ is nonempty. Let
+Let
 \[T=\{(f_i:X_i\to U):i\in I\}\]
 be a chain in $P$. The following steps lead to that $\bigcup T$ is an upper bound of $T$ in $P$. The proof of each step is nothing more than verifying the definitions and hence is omitted.
-
 \begin{enumerate}
     \item $\bigcup T=\bigcup_{i\in I}f_i:\bra{\bigcup_{i\in I}X_i}\to U$.
     \item $\bigcup T\in P$.
@@ -266,7 +260,7 @@ By Zorn's lemma, $P$ has a maximal element $\overline f:\overline X\to U$. If $\
 This proof is essentially the same as the proof that Zorn's lemma implies AC. Suppose $X$ is a nonempty set (if it is empty the desired result holds trivially).
 
 Let
-\[P=\cbra{(X',\leq):X'\subseteq X\text{ is well-ordered by }\leq}\]
+\[P=\cbra{(X',\leq):X'\subseteq X\text{ is well-ordered by}\leq}\]
 be partially ordered by
 \[(X',\leq_{X'})\leq(X'',\leq_{X''})\iff X'\subseteq X'',(\leq_{X'})\subseteq(\leq_{X''}).\]
 For a chain $T$ in $P$, we can similarly show that $\bigcup T$ is an upper bound of $T$ in $P$. By Zorn's lemma, $P$ has a maximal element which is necessarily $X$ with a well-ordering, completing the proof.
@@ -276,7 +270,7 @@ Suppose $X$ is a nonempty set (if it is empty the desired result holds trivially
 
 Define a sequence $a$ by transfinite recursion:
 \[a_\alpha=f(P\backslash\im\abra{a_\xi:\xi<\alpha})=f(P\backslash\{a_\xi:\xi<\alpha\}).\]
-If $\{a_\alpha:\alpha<\theta\}=P$ for some $\theta\in\ord$, then the process terminates here and we obtain a $\theta$-sequence $\abra{a_\alpha:\alpha<\theta}$. This is actually always the case because otherwise $\ord$ would be a set by the injectivity of $a$ (see the next paragraph).
+If $\{a_\alpha:\alpha<\theta\}=P$ for some $\theta\in\ord$, then the process terminates here and we obtain a $\theta$-sequence $\abra{a_\alpha:\alpha<\theta}$. This is actually always the case. If not, $a:\ord\to P$ is injective (see the next paragraph). Apply the axiom schema of replacement to $a^{-1}:P\supseteq\im a\to\ord$ leads to that $\ord$ is a set, which is not true.
 
 Because $f$ is a choice function, $a$ is injective and hence a bijection between an ordinal $\theta$ and $P$. That gives the desired well-ordering: for $a_\alpha,a_\beta\in P$, $a_\alpha\leq a_\beta$ if and only if $\alpha\leq\beta$. That this is a well-ordering follows from that every ordinal, including $\theta$, is well-ordered.
 
@@ -296,6 +290,12 @@ If you prefer something more formal, we can make $\phi$ a function on the univer
     We cannot give a well-order to every set in $X$ because that requires many choices (one choice of well-order for each set in $X$), which per se requires the axiom of choice. Our approach requires only one choice, namely choosing a well-order on $\bigcup X$.
 \end{rmk}
 
+\begin{rmk}
+    The reader might become overly suspicious and doubt if one choice (or two, or ten) is allowed without AC. It is legitimate, by mathematical logic. One might refer to Chapter IV of \textit{Mathematical Logic} by Heinz-Dieter Ebbinghaus et al. Sequent calculus contains a sequent rule that allows one to make one choice:
+    \[\frac{\Gamma\quad\phi\frac yx\quad\psi}{\Gamma\quad\exists x\phi\quad\psi}\quad\text{if $y$ is not free in }\Gamma\,\exists x\phi\,\psi.\]
+    Or in Qinxiang Cao's notation, $\phi[x\mapsto t]\vdash\exists x\phi$ (from his lecture note on April 11, 2025).
+\end{rmk}
+
 
 \section{Consequences of the Axiom of Choice}
 After all those proofs (they actually can be skipped without hindering the understanding of the results below), we arrive at some interesting and perhaps surprising consequences of the axiom of choice.
@@ -303,14 +303,14 @@ After all those proofs (they actually can be skipped without hindering the under
 \subsection{Every infinite set has a countable subset}\label{subsec: countable subset}
 One problem with the naive proof in the introduction is that inductions of natural numbers can never truly reach the infinity. Transfinite recursion comes to the rescue.
 
-\subsubsection*{Proof by AC}
+\paragraph{Proof by AC}
 Let $X$ be an infinite set. By AC, let $f$ be a choice function on $\P(X)\backslash\{\emptyset\}$. Define an $\omega$-sequence $\abra{a_n:n<\omega}$ by transfinite recursion:
 \[a_n=f(X\backslash\im a\restriction_n)=f(X\backslash\{a_0,\dots,a_{n-1}\}).\]
 Here $\omega$ is the least nonzero limit ordinal, i.e., the set $\N$ of natural numbers in the usual sense, and $n<\omega$ simply means $n\in\N$. We use this notation to emphasize that we are performing a transfinite recursion (with no limit steps).
 
 That solves the problem of infinity and well-defines an injective (infinite) sequence in $X$, proving the desired result.
 
-\subsubsection*{Proof by the well-ordering theorem}
+\paragraph{Proof by the well-ordering theorem}
 The $\omega$-sequence can alternatively be constructed with the well-ordering theorem. Let $X$ be well-ordered by $\leq$. Define $G:X\to X$ by the first-order formula
 \[\phi(x,y,X)=(x\leq y\land x\neq y\land\forall z((x\leq z\land x\neq z)\to y\leq z)).\]
 So $G(x)$ is the least element strictly greater than $x$, whose existence is guaranteed by the well-ordering.
@@ -391,11 +391,13 @@ The formula above implies that
 \[2\leq\mu\bra{\bigcup_{k=1}^\infty(q_k+V)}=\sum_{k=1}^\infty\mu(q_k+V)=\sum_{k=1}^\infty\mu(V)\leq6,\]
 where the inequalities follow from property (2) and (3), and the equalities follow from countable additivity and translation invariance. But it is not possible for $\mu(V)\in[0,\infty]$ to satisfy $2\leq\sum_{k=1}^\infty\mu(V)\leq6$. We reach a contradiction and the proof is completed.
 
-\begin{rmks}
+\begin{rmk}
     A small minority of mathematicians objects to the use of the axiom of choice. Nonetheless, the proof above warns one away from trying to construct a notion of size that satisfies all desired properties, because any such construction will necessarily contradict the axiom of choice, which is consistent with ZF.
+\end{rmk}
 
+\begin{rmk}
     A similar proof (after deriving some properties of outer measure) leads to that the outer measure on $\R$ is not additive.
-\end{rmks}
+\end{rmk}
 
 \begin{rmk}
     This disappointing fact leads to the definitions of $\sigma$-algebras and measurable spaces, measures, measurable functions, integration with respect to a measure...
