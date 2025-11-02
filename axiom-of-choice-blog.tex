@@ -32,7 +32,11 @@
 }
 \setlist[enumerate]{
     label=\textnormal{(\arabic*)},
-    leftmargin=2.5em,
+    % leftmargin=2.5em,
+    topsep=0.5em,
+    itemsep=0em,
+}
+\setlist[itemize]{
     topsep=0.5em,
     itemsep=0em,
 }
@@ -126,8 +130,38 @@ Instead of throwing the definitions and theorems straight at your face, we first
     \item Is it true that the Cartesian product of any nonempty collection of nonempty sets is nonempty?
 \end{enumerate}
 
-For the first question, you may say that hey you are just too stupid. We can construct an infinite sequence $\{x_n\}_{n\in\N}\subseteq X$ by the following. Take $x_0\in X$. Inductively, after $\{x_n\}_{n\leq m}$ is fixed, take $x_{m+1}\in X\backslash\{x_n\}_{n\leq m}$ because $X$ is infinite. But you only proved by induction (recall what induction means) that for any $n\in\N$ there exists a (finite) injective sequence of length $n$ in $X$, rather than an infinite one. A correct proof (of course the proposition is true) is given below using the axiom of choice.
+\subsection*{The First Question}
+For the first question, you may say that hey you are just too stupid. We can easily construct an infinite sequence $\{x_n\}_{n\in\N}$ in $X$ by the following. Take $x_0\in X$. Inductively, after $\{x_n\}_{n\leq m}$ is fixed, take $x_{m+1}\in X\backslash\{x_n\}_{n\leq m}\neq\emptyset$ because $X$ is infinite.
 
+This method has two problems. The first is that the many (countably infinite) choices of $x_{m+1}\in X\backslash\{x_n\}_{n\leq m}$ cannot be carried out without admitting (at least some weakened version of) the axiom of choice. The meaning of the last sentence will be further explained later.
+
+The other problem can be properly fixed. The problem is that you only proved by induction (recall what induction means) that for any $n\in\N$ there exists a (finite) injective sequence of length $n$ in $X$, rather than an infinite one. Recursion will remedy the situation.
+
+\begin{thm}
+    Given a function $G$ on the class of all finite sequences, there exists a unique function $F$ on $\N$, i.e., an infinite sequence, such that $F(n)=G(F\restriction_n)$ for each $n\in\N$.
+\end{thm}
+
+\begin{proof}
+    We define $F$ by a first-order formula. We only describe it in natural language and one should be convinced that it can be converted to a nice first-order formula $\phi(n,y,G)$.
+    
+    \begin{center}
+        $F(n)=x\iff$ there is a sequence $\abra{a_m:m<n}$ such that:
+        \begin{enumerate}
+            \item For every $m<n$, $a_m=G(\abra{a_k:k<m})$;
+            \item $x=G(\abra{a_m:m<n})$.
+        \end{enumerate}
+    \end{center}
+
+    One can prove by induction that for each $n\in\N$ $F(n)$ is unique; hence $F$ is uniquely determined by (2). And one can further prove by induction that for each $n\in\N$ there is an $n$-sequence satisfying (1).
+\end{proof}
+
+\begin{rmk}
+    Essentially the same proof leads to the celebrated \emph{transfinite recursion} of ordinals, and the \emph{$\in$-recursion} of transitive classes.
+\end{rmk}
+
+Of course the proposition is true. Two correct proofs are given in \ref{subsec: countable subset} using the axiom of choice and the well-ordering theorem, respectively. Both proofs use some kind of recursion to bypass the second problem above.
+
+\subsection*{The Second Question}
 For the second question, we first make precise the notion of the Cartesian product of an arbitrary collection of sets.
 
 \begin{defn}
@@ -155,8 +189,6 @@ Enough of those confusing words about axiomatic set theory. Next we give two equ
     If you are not at all interested in the proofs of the equivalence of the three formulations, you can totally skip them all without hindering the understanding of the interesting and perhaps surprising results about the axiom of choice.
 \end{rmk}
 
-Results that will be covered (in the following order, without any interdependence):
-
 \begin{enumerate}
     \item (Done) The Cartesian product of any nonempty collection of nonempty sets is nonempty.
     \item Every infinite set has a countable subset.
@@ -170,7 +202,7 @@ Results that will be covered (in the following order, without any interdependenc
 \end{zorn}
 
 \begin{wo}
-    Every set can be well-ordered, i.e., totally ordered such that every nonempty subset has a least element.
+    Every set can be well-ordered.
 \end{wo}
 
 
@@ -268,7 +300,7 @@ If you prefer something more formal, we can make $\phi$ a function on the univer
 \section{Consequences of the Axiom of Choice}
 After all those proofs (they actually can be skipped without hindering the understanding of the results below), we arrive at some interesting and perhaps surprising consequences of the axiom of choice.
 
-\subsection{Every infinite set has a countable subset}
+\subsection{Every infinite set has a countable subset}\label{subsec: countable subset}
 The problem with the naive proof in the introduction is that inductions (of natural numbers) can never truly reach the infinity. Transfinite recursion comes to the rescue.
 
 Let $X$ be an infinite set. By AC, let $f$ be a choice function on $\P(X)\backslash\{\emptyset\}$. Define an $\omega$-sequence $\abra{a_n:n<\omega}$ by transfinite recursion:
